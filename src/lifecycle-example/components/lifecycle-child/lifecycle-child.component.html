@@ -1,0 +1,22 @@
+<section class="flex flex-col p-5 gap-8">
+    <!-- <button (click)="triggerOnChanges()">OnChanges</button> -->
+    <ul class="flex flex-col gap-4">
+        <li class="font-bold">Order of lifecycle events:</li>
+        @for (item of lifecycleArray(); track $index) {
+        <li class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full flex bg-emerald-700 text-white">
+                <p class="m-auto">{{$index + 1}}</p>
+            </span>
+            <p>{{item}}</p>
+        </li>
+        }
+    </ul>
+    <ul class="flex flex-col gap-4">
+        <li class="font-bold">OnChanges breakdown:</li>
+        @for (item of changes(); track $index) {
+        <li class="flex items-center gap-2">
+            <p>{{item}}</p>
+        </li>
+        }
+    </ul>
+</section>

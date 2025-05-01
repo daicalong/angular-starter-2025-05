@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
+import { ApplicationConfig, Component, provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { appRoutes } from './app/app.routes';
+import { provideHttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
-@Component({
-  selector: 'app-root',
-  template: `
-    <h1>Hello from {{ name }}!</h1>
-    <a target="_blank" href="https://angular.dev/overview">
-      Learn more about Angular
-    </a>
-  `,
-})
-export class App {
-  name = 'Angular';
-}
+export const appConfig: ApplicationConfig = {
+    providers: [
+      provideHttpClient(),
+      provideZoneChangeDetection({ eventCoalescing: true }),
+      provideRouter(appRoutes),
+    ]
+  };
+  
+  
 
-bootstrapApplication(App);
+bootstrapApplication(AppComponent, appConfig);
