@@ -1,5 +1,5 @@
 <section class="flex flex-col p-5 gap-8">
-    <!-- <button (click)="triggerOnChanges()">OnChanges</button> -->
+    <button (click)="updateValue()" class="px-4 py-1 bg-blue-500 text-white mr-auto cursor-pointer">Manual content update</button>
     <ul class="flex flex-col gap-4">
         <li class="font-bold">Order of lifecycle events:</li>
         @for (item of lifecycleArray(); track $index) {
@@ -10,6 +10,7 @@
             <p>{{item}}</p>
         </li>
         }
+        <li><strong>Computed events: </strong><code>[{{computedLifecycleArray()}}]</code></li>
     </ul>
     <ul class="flex flex-col gap-4">
         <li class="font-bold">OnChanges breakdown:</li>
@@ -19,4 +20,10 @@
         </li>
         }
     </ul>
+    <div class="flex flex-col gap-4">
+        <p class="font-bold">OnDestroy:</p>
+        <p>Mock polling that subscribes to an observable every 1 second: <strong>{{pollingTimer()}}</strong></p>
+        <button (click)="destroy()" class="px-4 py-1 bg-blue-500 text-white mr-auto cursor-pointer">Destroy Component</button>
+        <button (click)="unsubscribeTimer()" class="px-4 py-1 bg-blue-500 text-white mr-auto cursor-pointer">Unsubcribe</button>
+    </div>
 </section>
