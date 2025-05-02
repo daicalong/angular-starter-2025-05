@@ -1,5 +1,4 @@
-import { AfterContentInit, AfterViewInit, ChangeDetectionStrategy, Component, computed, Input, input, OnChanges, OnDestroy, signal, SimpleChanges, type OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AfterViewInit, ChangeDetectionStrategy, Component, computed, input, OnChanges, OnDestroy, signal, SimpleChanges, type OnInit } from '@angular/core';
 import { interval, Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -10,6 +9,7 @@ import { interval, Subject, takeUntil } from 'rxjs';
 })
 export class LifecycleChildComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   inputChild = input<string>();
+  // @Input() inputChild?: string;
   lifecycleArray = signal<string[]>(['component: Initial declared value']);
   computedLifecycleArray = computed(() => this.lifecycleArray().map(x => {
     const sliceIndex = x.indexOf(':');
@@ -23,14 +23,13 @@ export class LifecycleChildComponent implements OnInit, OnChanges, AfterViewInit
   pollingTimer = signal<number | undefined>(undefined);
 
   constructor(
-    private router: Router,
   ) {
     this.lifecycleArray.update(val => [...val, 'constructor: Standard JavaScript class constructor. Runs when Angular instantiates the component']);
   }
 
   ngOnInit(): void {
     this.lifecycleArray.update(val => [...val, `ngOnInit:	Runs once after Angular has initialized all the component's inputs & variables`]);
-    // console.log(new Person('Emma', 31));
+    // const person = new Person('Emma', 31);
     // this.mockAsyncPolling();
   }
 
@@ -48,6 +47,7 @@ export class LifecycleChildComponent implements OnInit, OnChanges, AfterViewInit
 
   ngAfterViewInit(): void {
     this.lifecycleArray.update(val => [...val, `ngAfterViewInit: Runs once after the component's view/UI has been initialized`]);
+    this.lifecycleArray().forEach(x => console.log(x));
   }
 
   updateValue(): void {
@@ -56,7 +56,7 @@ export class LifecycleChildComponent implements OnInit, OnChanges, AfterViewInit
 
   ngOnDestroy(): void {
     // this.subscription.next();
-    console.log(`ngOnDestroy: Component destroyed`);
+    console.log(`ngOnDestroy: Called immediately before Angular destroys the directive or component`);
   }
 
   mockAsyncPolling(): void {
@@ -71,10 +71,6 @@ export class LifecycleChildComponent implements OnInit, OnChanges, AfterViewInit
   unsubscribeTimer(): void {
     this.subscription.next();
   }
-
-  destroy(): void {
-    this.router.navigate(['home']);
-  }
 }
 
 /**
@@ -85,7 +81,12 @@ export class Person {
   constructor(
     private _name?: string,
     private _age?: number,
-  ) { }
+  ) {
+    console.log({
+      name: this.name,
+      age: this.age,
+    })
+  }
 
   name = this._name || 'Nobody';
   age = this._age || 0;

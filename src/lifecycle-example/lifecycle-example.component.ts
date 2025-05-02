@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, computed, input, OnChanges, signal, SimpleChanges, type OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { LifecycleChildComponent } from "./components/lifecycle-child/lifecycle-child.component";
 
 @Component({
@@ -9,4 +9,5 @@ import { LifecycleChildComponent } from "./components/lifecycle-child/lifecycle-
 })
 export class LifecycleExampleComponent {
   inputParent = 'This is the input value from parent';
+  showChild = signal(true);
 }

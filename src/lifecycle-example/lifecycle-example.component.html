@@ -1,1 +1,5 @@
-<app-lifecycle-child [inputChild]="inputParent"></app-lifecycle-child>
+@if(showChild()) {
+    <app-lifecycle-child [inputChild]="inputParent"></app-lifecycle-child>
+}
+<button (click)="showChild.set(!showChild())"
+    class="m-4 min-w-60 px-4 py-1 bg-red-500 text-white mr-auto cursor-pointer">ngOnDestroy</button>
