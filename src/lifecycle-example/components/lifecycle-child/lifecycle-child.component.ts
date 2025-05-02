@@ -1,9 +1,12 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, computed, input, OnChanges, OnDestroy, signal, SimpleChanges, type OnInit } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { interval, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-lifecycle-child',
-  imports: [],
+  imports: [
+    ReactiveFormsModule,
+  ],
   templateUrl: './lifecycle-child.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
