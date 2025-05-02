@@ -1,1 +1,14 @@
-<p>home works!</p>,
+<section class="p-10 flex flex-col gap-2">
+    <div class="flex gap-2">
+        <button (click)="getData(1)" class="px-4 py-1 bg-blue-500 text-white cursor-pointer">Get 1</button>
+        <button (click)="getData(2)" class="px-4 py-1 bg-blue-500 text-white cursor-pointer">Get 2</button>
+    </div>
+    @if (loading()) {
+    <p>Loading...</p>
+    } @else {
+    <p>ID: {{computedUser()?.id}}</p>
+    <p>Name: {{computedUser()?.name}}</p>
+    <p>Age: {{computedUser()?.age}}</p>
+    <p>Birthday: {{computedUser()?.birthday | date: 'MM/dd/yyyy'}}</p>
+    }
+</section>

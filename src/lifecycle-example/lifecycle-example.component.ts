@@ -5,9 +5,8 @@ import { LifecycleChildComponent } from "./components/lifecycle-child/lifecycle-
   selector: 'app-lifecycle-example',
   imports: [LifecycleChildComponent],
   templateUrl: './lifecycle-example.component.html',
-  styleUrl: './lifecycle-example.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LifecycleExampleComponent {
-  inputParent = 'input value from parent';
+  inputParent = 'This is the input value from parent';
 }
