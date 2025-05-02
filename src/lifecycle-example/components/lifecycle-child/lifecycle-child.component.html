@@ -1,7 +1,26 @@
-<section class="flex flex-col p-5 gap-8">
-    <button (click)="updateValue()" class="px-4 py-1 bg-blue-500 text-white mr-auto cursor-pointer">Manual content update</button>
-    <ul class="flex flex-col gap-4">
-        <li class="font-bold">Order of lifecycle events:</li>
+<section class="grid grid-cols-2 p-6 gap-14">
+
+    <ul class="flex flex-col gap-4 col-span-1">
+        <li class="font-bold">Sequence of lifecycle events:</li>
+        <li>
+            <button (click)="updateValue()" class="px-4 py-1 bg-blue-500 text-white col-span-1 cursor-pointer">Manual
+                content update</button>
+        </li>
+        @for (item of computedLifecycleArray(); track $index) {
+        <li class="flex gap-2">
+            <span class="w-6 h-6 rounded-full flex bg-emerald-700 text-white">
+                <p class="m-auto">{{$index + 1}}</p>
+            </span>
+            <span class="flex flex-col gap-1 items-start">
+                <code>{{item.label}}</code>
+                <span>{{item.value}}</span>
+            </span>
+        </li>
+        }
+    </ul>
+    <!-- <ul class="flex flex-col gap-4 col-span-1">
+        </li>
+     li class="font-bold">Sequence of lifecycle events:</li>
         @for (item of lifecycleArray(); track $index) {
         <li class="flex items-center gap-2">
             <span class="w-6 h-6 rounded-full flex bg-emerald-700 text-white">
@@ -10,9 +29,8 @@
             <p>{{item}}</p>
         </li>
         }
-        <li><strong>Computed events: </strong><code>[{{computedLifecycleArray()}}]</code></li>
-    </ul>
-    <ul class="flex flex-col gap-4">
+    </ul> -->
+    <ul class="flex flex-col gap-4 col-span-full">
         <li class="font-bold">OnChanges breakdown:</li>
         @for (item of changes(); track $index) {
         <li class="flex items-center gap-2">
@@ -20,10 +38,12 @@
         </li>
         }
     </ul>
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-4 col-span-full">
         <p class="font-bold">OnDestroy:</p>
         <p>Mock polling that subscribes to an observable every 1 second: <strong>{{pollingTimer()}}</strong></p>
-        <button (click)="destroy()" class="px-4 py-1 bg-blue-500 text-white mr-auto cursor-pointer">Destroy Component</button>
-        <button (click)="unsubscribeTimer()" class="px-4 py-1 bg-blue-500 text-white mr-auto cursor-pointer">Unsubcribe</button>
+        <button (click)="destroy()" class="px-4 py-1 bg-blue-500 text-white mr-auto cursor-pointer">Destroy
+            Component</button>
+        <button (click)="unsubscribeTimer()"
+            class="px-4 py-1 bg-blue-500 text-white mr-auto cursor-pointer">Unsubcribe</button>
     </div>
 </section>
